@@ -41,11 +41,6 @@ System.register(['@angular/core', '@angular/http', './featured.component', './fo
                         this.option = "";
                     }
                 };
-                AppComponent.prototype.getFollowedStreams = function () {
-                    //console.log('testy');
-                    // this.followedList.getStreams();
-                    //
-                };
                 AppComponent = __decorate([
                     core_1.Component({
                         selector: 'my-app',

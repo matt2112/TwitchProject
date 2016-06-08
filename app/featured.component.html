@@ -7,7 +7,7 @@
 </div>
 <div class="row">
     <div class="stream" *ngFor="let stream of streams">
-        <img class="icon" [src]="stream.image">
+        <img class="streamIcon" [src]="stream.image">
         <div>
             <h4 class="title">{{stream.title}}</h4>
             <p [innerHTML]="stream.text"></p>

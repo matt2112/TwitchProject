@@ -30,12 +30,4 @@ export class AppComponent {
             this.option = "";
         }
     }
-    
-
-    
-    getFollowedStreams() {
-        //console.log('testy');
-        // this.followedList.getStreams();
-        //
-    }
 }

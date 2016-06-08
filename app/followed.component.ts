@@ -12,26 +12,37 @@ import { StreamService } from './stream.service';
 })
 export class FollowedComponent {
     
-    data: StreamCollection;
-    
-    monkey: string;
-    
-    streams = [];
-    
     constructor(
         private _streamService: StreamService) {
     }
-    
-    getOnlineStreams() {
-        console.log('newtesty');
-        this._streamService.getFollowedStreams()
-            .subscribe(
-                data => {
-                console.log(data);
-            });
-    }
+
+    channels = [];
     
     getAllChannels() {
-        console.log("test");
+
+        this.channels = [];
+        var followedChannels = ["ESL_SC2", "OgamingSC2", "cretetion", "freecodecamp",
+                                 "storbeck", "habathcx", "RobotCaleb", "noobs2ninjas"];
+
+        for (var i = 0; i < followedChannels.length; i++) {
+            this._streamService.getFollowedChannels(followedChannels[i])
+                .subscribe(
+                    data => {
+                        this.channels.push(data);
+                        // console.log(data);
+                });
+            
+        }
+
+        for (var i = 0; i < followedChannels.length; i++) {
+            this._streamService.checkChannelOnline(followedChannels[i])
+                .subscribe(
+                    data => {
+                        console.log(data);
+                });
+            
+        }
+
+        
     }
 }

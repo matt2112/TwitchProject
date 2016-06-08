@@ -26,14 +26,17 @@ export class StreamService {
         //return Promise.resolve(STREAMS);
     }
     
-    getFollowedStreams() {
+    getFollowedChannels(channel: string) {
         
-        var url = "https://api.twitch.tv/kraken/streams?channel=OgamingSC2,freecodecamp";
-        
-        var streams = this._http.get(url)
+        return this._http.get("https://api.twitch.tv/kraken/channels/" + channel)
             .map(res => res.json());
-        
-        console.log(streams);
-        return streams;
+
+    }
+
+    checkChannelOnline(channel: string) {
+
+        return this._http.get("https://api.twitch.tv/kraken/streams/" + channel)
+            .map(res => res.json());
+            
     }
 }

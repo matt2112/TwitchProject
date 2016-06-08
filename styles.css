@@ -63,7 +63,7 @@
     padding: 0px;
 }
 
-.icon {
+.streamIcon {
     float: left;
     border-radius: 30%;
     width: 150px;
@@ -82,4 +82,33 @@
 #featuredOptions {
     background-color: lightgreen;
     padding: 10px;
+}
+
+.channel {
+    background-color: darkcyan;
+    border-top: 1px solid black;
+    height: 100px;
+}
+
+.channelIcon {
+    float: left;
+    border-radius: 30%;
+    width: 100px;
+    padding: 10px;
+}
+
+.channelTitle {
+    font-weight: bold;
+    color: black;
+}
+
+.channelStatus {
+    color: black;
+    text-decoration: none;
+    margin: 0px;
+    padding: 0px;
+}
+
+a:hover {
+    text-decoration: none;
 }

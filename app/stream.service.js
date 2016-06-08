@@ -34,12 +34,13 @@ System.register(['@angular/core', '@angular/http', 'rxjs/add/operator/map'], fun
                         .map(function (res) { return res.json(); });
                     //return Promise.resolve(STREAMS);
                 };
-                StreamService.prototype.getFollowedStreams = function () {
-                    var url = "https://api.twitch.tv/kraken/streams?channel=OgamingSC2,freecodecamp";
-                    var streams = this._http.get(url)
+                StreamService.prototype.getFollowedChannels = function (channel) {
+                    return this._http.get("https://api.twitch.tv/kraken/channels/" + channel)
                         .map(function (res) { return res.json(); });
-                    console.log(streams);
-                    return streams;
+                };
+                StreamService.prototype.checkChannelOnline = function (channel) {
+                    return this._http.get("https://api.twitch.tv/kraken/streams/" + channel)
+                        .map(function (res) { return res.json(); });
                 };
                 StreamService = __decorate([
                     core_1.Injectable(), 

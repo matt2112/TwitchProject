@@ -1,6 +1,18 @@
-
 <div id="followedOptions" class="row">
     <div id="all" class="col-md-4 button" (click)="getAllChannels()">All</div>
     <div id="online" class="col-md-4 button">Online</div>
     <div id="offline" class="col-md-4 button">Offline</div>
+</div>
+<div class="row">
+    <div *ngFor="let channel of channels">
+        <a [href]="channel.url" target="blank">
+            <div class="channel">
+                <img class="channelIcon" [src]="channel.logo">
+                <div>
+                    <h4 class="channelTitle">{{ channel.name }}</h4>
+                    <p class="channelStatus">Status: {{ channel.status }}</p>
+                </div>
+            </div>
+        </a>
+    </div>
 </div>

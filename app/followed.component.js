@@ -24,17 +24,26 @@ System.register(['@angular/core', './stream.service'], function(exports_1, conte
             FollowedComponent = (function () {
                 function FollowedComponent(_streamService) {
                     this._streamService = _streamService;
-                    this.streams = [];
+                    this.channels = [];
                 }
-                FollowedComponent.prototype.getOnlineStreams = function () {
-                    console.log('newtesty');
-                    this._streamService.getFollowedStreams()
-                        .subscribe(function (data) {
-                        console.log(data);
-                    });
-                };
                 FollowedComponent.prototype.getAllChannels = function () {
-                    console.log("test");
+                    var _this = this;
+                    this.channels = [];
+                    var followedChannels = ["ESL_SC2", "OgamingSC2", "cretetion", "freecodecamp",
+                        "storbeck", "habathcx", "RobotCaleb", "noobs2ninjas"];
+                    for (var i = 0; i < followedChannels.length; i++) {
+                        this._streamService.getFollowedChannels(followedChannels[i])
+                            .subscribe(function (data) {
+                            _this.channels.push(data);
+                            // console.log(data);
+                        });
+                    }
+                    for (var i = 0; i < followedChannels.length; i++) {
+                        this._streamService.checkChannelOnline(followedChannels[i])
+                            .subscribe(function (data) {
+                            console.log(data);
+                        });
+                    }
                 };
                 FollowedComponent = __decorate([
                     core_1.Component({
