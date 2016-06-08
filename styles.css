@@ -1,0 +1,85 @@
+#mainApp {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background-color: grey;
+    width: 50%;
+    border: 2px solid black;
+}
+
+#header {
+    background-color: lightblue;
+    text-align: center;
+    font-size: 2em;
+    height: 60px;
+    line-height: 60px;
+    border-bottom: 1px solid black;
+}
+
+#topBar {
+    height: 60px;
+}
+
+#followedOptions {
+    height: 60px;
+}
+
+.button {
+    cursor: pointer;
+    font-size: 1.5em;
+    height: 100%;
+    line-height: 60px;
+    text-align: center;
+    background-color: #ffcc99;
+    border-bottom: 1px solid black;
+}
+
+.button:hover {
+    background-color: #ff9933;
+}
+
+#followed {
+    border-left: 1px solid black;   
+    border-right: 1px solid black;    
+}
+
+#online {
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+}
+
+#searchbar {
+    padding: 10px;
+    height: 60px;
+    background-color: lightblue;
+}
+
+.stream {
+    background-color: lightcoral;
+    border-top: 1px solid black;
+}
+
+.stream p {
+    margin: 0px;
+    padding: 0px;
+}
+
+.icon {
+    float: left;
+    border-radius: 30%;
+    width: 150px;
+    padding: 10px;
+}
+
+.title {
+    color: black;
+    font-weight: bold;
+}
+
+#num {
+    width: 50px;
+}
+
+#featuredOptions {
+    background-color: lightgreen;
+    padding: 10px;
+}
