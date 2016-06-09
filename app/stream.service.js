@@ -38,7 +38,7 @@ System.register(['@angular/core', '@angular/http', 'rxjs/add/operator/map'], fun
                     return this._http.get("https://api.twitch.tv/kraken/channels/" + channel)
                         .map(function (res) { return res.json(); });
                 };
-                StreamService.prototype.checkChannelOnline = function (channel) {
+                StreamService.prototype.getStreams = function (channel) {
                     return this._http.get("https://api.twitch.tv/kraken/streams/" + channel)
                         .map(function (res) { return res.json(); });
                 };

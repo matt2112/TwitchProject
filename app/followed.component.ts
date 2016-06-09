@@ -16,33 +16,63 @@ export class FollowedComponent {
         private _streamService: StreamService) {
     }
 
-    channels = [];
-    
+    channelObjects = [];
+
+    followedChannels = ["esl_sc2", "ogamingsc2", "cretetion", "freecodecamp",
+                        "storbeck", "habathcx", "robotcaleb", "noobs2ninjas"];
+
+    offlineChannels = ["esl_sc2", "ogamingsc2", "cretetion", "freecodecamp",
+                        "storbeck", "habathcx", "robotcaleb", "noobs2ninjas"];
+
+    status: string = "online";
+
     getAllChannels() {
 
-        this.channels = [];
-        var followedChannels = ["ESL_SC2", "OgamingSC2", "cretetion", "freecodecamp",
-                                 "storbeck", "habathcx", "RobotCaleb", "noobs2ninjas"];
-
-        for (var i = 0; i < followedChannels.length; i++) {
-            this._streamService.getFollowedChannels(followedChannels[i])
-                .subscribe(
-                    data => {
-                        this.channels.push(data);
-                        // console.log(data);
-                });
-            
-        }
-
-        for (var i = 0; i < followedChannels.length; i++) {
-            this._streamService.checkChannelOnline(followedChannels[i])
-                .subscribe(
-                    data => {
-                        console.log(data);
-                });
-            
-        }
-
+        this.channelObjects = [];
         
+        for (var i = 0; i < this.followedChannels.length; i++) {
+            this._streamService.getFollowedChannels(this.followedChannels[i])
+                .subscribe(
+                    data => {
+                        this.channelObjects.push(data);
+                });
+        }
+    }
+
+    getOfflineChannels() {
+
+        this.channelObjects = [];
+        
+        for (var i = 0; i < this.offlineChannels.length; i++) {
+            this._streamService.getFollowedChannels(this.offlineChannels[i])
+                .subscribe(
+                    data => {
+                        this.channelObjects.push(data);
+                });
+        }
+    }
+
+    getStreams(option: string) {
+        
+        this.channelObjects = [];
+
+        for (var i = 0; i < this.followedChannels.length; i++) {
+            this._streamService.getStreams(this.followedChannels[i])
+                .subscribe(
+                    data => {
+                        if (data.stream !== null && option === "online") {
+                            this.channelObjects.push(data.stream.channel);
+                        } else if (data.stream !== null && option === "offline") {
+                            var index = this.offlineChannels.indexOf(data.stream.channel);
+                            this.offlineChannels.splice(index, 1);
+                            console.log(i);
+                        }
+                });
+        }
+    }
+
+    getOfflineStreams() {
+        this.getStreams("offline");
+        this.getOfflineChannels();
     }
 }

@@ -24,26 +24,53 @@ System.register(['@angular/core', './stream.service'], function(exports_1, conte
             FollowedComponent = (function () {
                 function FollowedComponent(_streamService) {
                     this._streamService = _streamService;
-                    this.channels = [];
+                    this.channelObjects = [];
+                    this.followedChannels = ["esl_sc2", "ogamingsc2", "cretetion", "freecodecamp",
+                        "storbeck", "habathcx", "robotcaleb", "noobs2ninjas"];
+                    this.offlineChannels = ["esl_sc2", "ogamingsc2", "cretetion", "freecodecamp",
+                        "storbeck", "habathcx", "robotcaleb", "noobs2ninjas"];
+                    this.status = "online";
                 }
                 FollowedComponent.prototype.getAllChannels = function () {
                     var _this = this;
-                    this.channels = [];
-                    var followedChannels = ["ESL_SC2", "OgamingSC2", "cretetion", "freecodecamp",
-                        "storbeck", "habathcx", "RobotCaleb", "noobs2ninjas"];
-                    for (var i = 0; i < followedChannels.length; i++) {
-                        this._streamService.getFollowedChannels(followedChannels[i])
+                    this.channelObjects = [];
+                    for (var i = 0; i < this.followedChannels.length; i++) {
+                        this._streamService.getFollowedChannels(this.followedChannels[i])
                             .subscribe(function (data) {
-                            _this.channels.push(data);
-                            // console.log(data);
+                            _this.channelObjects.push(data);
                         });
                     }
-                    for (var i = 0; i < followedChannels.length; i++) {
-                        this._streamService.checkChannelOnline(followedChannels[i])
+                };
+                FollowedComponent.prototype.getOfflineChannels = function () {
+                    var _this = this;
+                    this.channelObjects = [];
+                    for (var i = 0; i < this.offlineChannels.length; i++) {
+                        this._streamService.getFollowedChannels(this.offlineChannels[i])
                             .subscribe(function (data) {
-                            console.log(data);
+                            _this.channelObjects.push(data);
                         });
                     }
+                };
+                FollowedComponent.prototype.getStreams = function (option) {
+                    var _this = this;
+                    this.channelObjects = [];
+                    for (var i = 0; i < this.followedChannels.length; i++) {
+                        this._streamService.getStreams(this.followedChannels[i])
+                            .subscribe(function (data) {
+                            if (data.stream !== null && option === "online") {
+                                _this.channelObjects.push(data.stream.channel);
+                            }
+                            else if (data.stream !== null && option === "offline") {
+                                var index = _this.offlineChannels.indexOf(data.stream.channel);
+                                _this.offlineChannels.splice(index, 1);
+                                console.log(i);
+                            }
+                        });
+                    }
+                };
+                FollowedComponent.prototype.getOfflineStreams = function () {
+                    this.getStreams("offline");
+                    this.getOfflineChannels();
                 };
                 FollowedComponent = __decorate([
                     core_1.Component({

@@ -33,7 +33,7 @@ export class StreamService {
 
     }
 
-    checkChannelOnline(channel: string) {
+    getStreams(channel: string) {
 
         return this._http.get("https://api.twitch.tv/kraken/streams/" + channel)
             .map(res => res.json());
