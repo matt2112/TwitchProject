@@ -32,15 +32,18 @@ System.register(['@angular/core', '@angular/http', 'rxjs/add/operator/map'], fun
                     var limit = "?limit=" + limit;
                     return this._http.get(url + limit)
                         .map(function (res) { return res.json(); });
-                    //return Promise.resolve(STREAMS);
                 };
-                StreamService.prototype.getFollowedChannels = function (channel) {
+                StreamService.prototype.getChannel = function (channel) {
                     return this._http.get("https://api.twitch.tv/kraken/channels/" + channel)
                         .map(function (res) { return res.json(); });
                 };
-                StreamService.prototype.getStreams = function (channel) {
-                    return this._http.get("https://api.twitch.tv/kraken/streams/" + channel)
-                        .map(function (res) { return res.json(); });
+                StreamService.prototype.getStreams = function (channels, status) {
+                    var streams = [];
+                    for (var i = 0; i < channels.length; i++) {
+                        streams.push(this._http.get("https://api.twitch.tv/kraken/streams/" + channels[i])
+                            .map(function (res) { return res.json(); }));
+                    }
+                    return streams;
                 };
                 StreamService = __decorate([
                     core_1.Injectable(), 

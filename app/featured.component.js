@@ -27,6 +27,7 @@ System.register(['@angular/core', './stream', './stream.service'], function(expo
             FeaturedComponent = (function () {
                 function FeaturedComponent(_streamService) {
                     this._streamService = _streamService;
+                    this.isLoading = false;
                     this.streams = [];
                 }
                 FeaturedComponent.prototype.getStreams = function (form) {
@@ -34,8 +35,10 @@ System.register(['@angular/core', './stream', './stream.service'], function(expo
                     this.num = form.value.num;
                     this.streams = [];
                     if (parseInt(this.num) > 0) {
+                        this.isLoading = true;
                         this._streamService.getFeaturedStreams(this.num)
                             .subscribe(function (data) {
+                            _this.isLoading = false;
                             for (var i = 0; i < data.featured.length; i++) {
                                 var newStream = new stream_1.Stream;
                                 newStream.title = data.featured[i]["title"];

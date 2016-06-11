@@ -5,6 +5,7 @@
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 </div>
+<div *ngIf="isLoading">Getting data</div>
 <div class="row">
     <div class="stream" *ngFor="let stream of streams">
         <img class="streamIcon" [src]="stream.image">

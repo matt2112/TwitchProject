@@ -25,52 +25,38 @@ System.register(['@angular/core', './stream.service'], function(exports_1, conte
                 function FollowedComponent(_streamService) {
                     this._streamService = _streamService;
                     this.channelObjects = [];
+                    this.streamObjects = [];
+                    this.count = 0;
                     this.followedChannels = ["esl_sc2", "ogamingsc2", "cretetion", "freecodecamp",
                         "storbeck", "habathcx", "robotcaleb", "noobs2ninjas"];
-                    this.offlineChannels = ["esl_sc2", "ogamingsc2", "cretetion", "freecodecamp",
-                        "storbeck", "habathcx", "robotcaleb", "noobs2ninjas"];
-                    this.status = "online";
                 }
                 FollowedComponent.prototype.getAllChannels = function () {
                     var _this = this;
                     this.channelObjects = [];
                     for (var i = 0; i < this.followedChannels.length; i++) {
-                        this._streamService.getFollowedChannels(this.followedChannels[i])
+                        this._streamService.getChannel(this.followedChannels[i])
                             .subscribe(function (data) {
-                            _this.channelObjects.push(data);
-                        });
-                    }
-                };
-                FollowedComponent.prototype.getOfflineChannels = function () {
-                    var _this = this;
-                    this.channelObjects = [];
-                    for (var i = 0; i < this.offlineChannels.length; i++) {
-                        this._streamService.getFollowedChannels(this.offlineChannels[i])
-                            .subscribe(function (data) {
-                            _this.channelObjects.push(data);
-                        });
-                    }
-                };
-                FollowedComponent.prototype.getStreams = function (option) {
-                    var _this = this;
-                    this.channelObjects = [];
-                    for (var i = 0; i < this.followedChannels.length; i++) {
-                        this._streamService.getStreams(this.followedChannels[i])
-                            .subscribe(function (data) {
-                            if (data.stream !== null && option === "online") {
-                                _this.channelObjects.push(data.stream.channel);
-                            }
-                            else if (data.stream !== null && option === "offline") {
-                                var index = _this.offlineChannels.indexOf(data.stream.channel);
-                                _this.offlineChannels.splice(index, 1);
-                                console.log(i);
+                            if (5 < 7) {
+                                _this.channelObjects.push(data);
                             }
                         });
                     }
                 };
-                FollowedComponent.prototype.getOfflineStreams = function () {
-                    this.getStreams("offline");
-                    this.getOfflineChannels();
+                FollowedComponent.prototype.addStream = function (stream) {
+                    this.streamObjects.push(stream);
+                };
+                FollowedComponent.prototype.getChannel = function (channel) {
+                    var _this = this;
+                    this._streamService.getChannel(channel)
+                        .subscribe(function (data) { return _this.channelObjects.push(data); });
+                };
+                FollowedComponent.prototype.testStreams = function (status) {
+                    var channels = ["freecodecamp", "esl_sc2", "ogamingsc2"];
+                    var test = this._streamService.getStreams(channels, status);
+                    var testStreams = [];
+                    for (var i = 0; i < test.length; i++) {
+                        console.log(test[i].subscribe(function (data) { data; }));
+                    }
                 };
                 FollowedComponent = __decorate([
                     core_1.Component({
@@ -85,4 +71,18 @@ System.register(['@angular/core', './stream.service'], function(exports_1, conte
         }
     }
 });
+/**
+ *
+ *
+ *
+ *                 var why = 'nya';
+                if (status === 'online' && data.stream !== null) {
+                    console.log(data);
+                    return data;
+                } else if (status === 'offline' && data.stream === null) {
+                    console.log(why);
+                    this.channelObjects.push(data);
+                    return data;
+                }
+ */ 
 //# sourceMappingURL=followed.component.js.map

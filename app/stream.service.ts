@@ -23,20 +23,21 @@ export class StreamService {
         return this._http.get(url + limit)
             .map(res => res.json());
 
-        //return Promise.resolve(STREAMS);
     }
     
-    getFollowedChannels(channel: string) {
+    getChannel(channel: string) {
         
         return this._http.get("https://api.twitch.tv/kraken/channels/" + channel)
             .map(res => res.json());
 
     }
 
-    getStreams(channel: string) {
-
-        return this._http.get("https://api.twitch.tv/kraken/streams/" + channel)
-            .map(res => res.json());
-            
+    getStreams(channels: any, status: string) {
+        var streams = [];
+        for (var i = 0; i < channels.length; i++) {
+            streams.push(this._http.get("https://api.twitch.tv/kraken/streams/" + channels[i])
+                .map(res => res.json()));
+        }
+        return streams;
     }
 }
