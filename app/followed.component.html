@@ -1,7 +1,7 @@
 <div id="followedOptions" class="row">
     <div id="all" class="col-md-4 button" (click)="getAllChannels()">All</div>
-    <div id="online" class="col-md-4 button" (click)="testStreams('online')">Online</div>
-    <div id="offline" class="col-md-4 button" (click)="testStreams('offline')">Offline</div>
+    <div id="online" class="col-md-4 button" (click)="getChannelsByStatus('online')">Online</div>
+    <div id="offline" class="col-md-4 button" (click)="getChannelsByStatus('offline')">Offline</div>
 </div>
 <div class="row">
     <div *ngFor="let channel of channelObjects">
@@ -14,14 +14,5 @@
                 </div>
             </div>
         </a>
-    </div>
-</div>
-<div class="row">
-    <div class="stream" *ngFor="let stream of streamObjects">
-        <img class="streamIcon" [src]="stream.image">
-        <div>
-            <h4 class="title">{{stream.title}}</h4>
-            <p [innerHTML]="stream.text"></p>
-        <div>
     </div>
 </div>

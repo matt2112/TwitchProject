@@ -6,7 +6,6 @@ import 'rxjs/add/operator/map';
 
 import { Stream } from './stream';
 import { StreamCollection } from './stream-collection';
-// import { STREAMS } from './mock-streams';
 
 @Injectable()
 export class StreamService {
@@ -32,12 +31,8 @@ export class StreamService {
 
     }
 
-    getStreams(channels: any, status: string) {
-        var streams = [];
-        for (var i = 0; i < channels.length; i++) {
-            streams.push(this._http.get("https://api.twitch.tv/kraken/streams/" + channels[i])
-                .map(res => res.json()));
-        }
-        return streams;
+    getStream(channel: string) {
+        return this._http.get("https://api.twitch.tv/kraken/streams/" + channel)
+            .map(res => { return [res.json(), channel]});
     }
 }

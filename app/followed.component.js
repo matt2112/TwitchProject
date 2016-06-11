@@ -25,8 +25,6 @@ System.register(['@angular/core', './stream.service'], function(exports_1, conte
                 function FollowedComponent(_streamService) {
                     this._streamService = _streamService;
                     this.channelObjects = [];
-                    this.streamObjects = [];
-                    this.count = 0;
                     this.followedChannels = ["esl_sc2", "ogamingsc2", "cretetion", "freecodecamp",
                         "storbeck", "habathcx", "robotcaleb", "noobs2ninjas"];
                 }
@@ -35,27 +33,27 @@ System.register(['@angular/core', './stream.service'], function(exports_1, conte
                     this.channelObjects = [];
                     for (var i = 0; i < this.followedChannels.length; i++) {
                         this._streamService.getChannel(this.followedChannels[i])
-                            .subscribe(function (data) {
-                            if (5 < 7) {
-                                _this.channelObjects.push(data);
-                            }
-                        });
+                            .subscribe(function (data) { return _this.channelObjects.push(data); });
                     }
-                };
-                FollowedComponent.prototype.addStream = function (stream) {
-                    this.streamObjects.push(stream);
                 };
                 FollowedComponent.prototype.getChannel = function (channel) {
                     var _this = this;
                     this._streamService.getChannel(channel)
                         .subscribe(function (data) { return _this.channelObjects.push(data); });
                 };
-                FollowedComponent.prototype.testStreams = function (status) {
-                    var channels = ["freecodecamp", "esl_sc2", "ogamingsc2"];
-                    var test = this._streamService.getStreams(channels, status);
-                    var testStreams = [];
-                    for (var i = 0; i < test.length; i++) {
-                        console.log(test[i].subscribe(function (data) { data; }));
+                FollowedComponent.prototype.getChannelsByStatus = function (status) {
+                    var _this = this;
+                    this.channelObjects = [];
+                    for (var i = 0; i < this.followedChannels.length; i++) {
+                        this._streamService.getStream(this.followedChannels[i])
+                            .subscribe(function (data) {
+                            if (data[0].stream === null && status === "offline") {
+                                _this.getChannel(data[1]);
+                            }
+                            else if (data[0].stream !== null && status === "online") {
+                                _this.channelObjects.push(data[0].stream.channel);
+                            }
+                        });
                     }
                 };
                 FollowedComponent = __decorate([
@@ -71,18 +69,4 @@ System.register(['@angular/core', './stream.service'], function(exports_1, conte
         }
     }
 });
-/**
- *
- *
- *
- *                 var why = 'nya';
-                if (status === 'online' && data.stream !== null) {
-                    console.log(data);
-                    return data;
-                } else if (status === 'offline' && data.stream === null) {
-                    console.log(why);
-                    this.channelObjects.push(data);
-                    return data;
-                }
- */ 
 //# sourceMappingURL=followed.component.js.map

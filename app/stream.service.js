@@ -22,7 +22,6 @@ System.register(['@angular/core', '@angular/http', 'rxjs/add/operator/map'], fun
             },
             function (_1) {}],
         execute: function() {
-            // import { STREAMS } from './mock-streams';
             StreamService = (function () {
                 function StreamService(_http) {
                     this._http = _http;
@@ -37,13 +36,9 @@ System.register(['@angular/core', '@angular/http', 'rxjs/add/operator/map'], fun
                     return this._http.get("https://api.twitch.tv/kraken/channels/" + channel)
                         .map(function (res) { return res.json(); });
                 };
-                StreamService.prototype.getStreams = function (channels, status) {
-                    var streams = [];
-                    for (var i = 0; i < channels.length; i++) {
-                        streams.push(this._http.get("https://api.twitch.tv/kraken/streams/" + channels[i])
-                            .map(function (res) { return res.json(); }));
-                    }
-                    return streams;
+                StreamService.prototype.getStream = function (channel) {
+                    return this._http.get("https://api.twitch.tv/kraken/streams/" + channel)
+                        .map(function (res) { return [res.json(), channel]; });
                 };
                 StreamService = __decorate([
                     core_1.Injectable(), 
