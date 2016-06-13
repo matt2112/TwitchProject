@@ -1,18 +1,21 @@
-<div id="followedOptions" class="row">
-    <div id="all" class="col-md-4 button" (click)="getAllChannels()">All</div>
-    <div id="online" class="col-md-4 button" (click)="getChannelsByStatus('online')">Online</div>
-    <div id="offline" class="col-md-4 button" (click)="getChannelsByStatus('offline')">Offline</div>
-</div>
 <div class="row">
-    <div *ngFor="let channel of channelObjects">
-        <a [href]="channel.url" target="blank">
-            <div class="channel">
+    <div id="all" class="col-md-4 button" (click)="getChannels('all')">All</div>
+    <div id="online" class="col-md-4 button" (click)="getChannels('online')">Online</div>
+    <div id="offline" class="col-md-4 button" (click)="getChannels('offline')">Offline</div>
+</div>
+<div *ngFor="let channel of channelObjects">
+    <a [href]="channel.url" target="blank">
+        <div class="channel row">
+            <div class="col-md-2">
                 <img class="channelIcon" [src]="channel.logo">
-                <div>
-                    <h4 class="channelTitle">{{ channel.name }}</h4>
-                    <p class="channelStatus">Status: {{ channel.status }}</p>
-                </div>
             </div>
-        </a>
-    </div>
+            <div class="channelInfo col-md-8">
+                <h4 class="channelTitle">{{ channel.name }}</h4>
+                <p class="channelStatus">Status: {{ channel.status }}</p>
+            </div>
+            <div class="col-md-2">
+                <div class="onlineStatus" [class.online]="channel.online" [class.offline]="!channel.online"></div>
+            </div>
+        </div>
+    </a>
 </div>

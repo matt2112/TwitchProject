@@ -28,29 +28,25 @@ System.register(['@angular/core', './stream.service'], function(exports_1, conte
                     this.followedChannels = ["esl_sc2", "ogamingsc2", "cretetion", "freecodecamp",
                         "storbeck", "habathcx", "robotcaleb", "noobs2ninjas"];
                 }
-                FollowedComponent.prototype.getAllChannels = function () {
-                    var _this = this;
-                    this.channelObjects = [];
-                    for (var i = 0; i < this.followedChannels.length; i++) {
-                        this._streamService.getChannel(this.followedChannels[i])
-                            .subscribe(function (data) { return _this.channelObjects.push(data); });
-                    }
-                };
-                FollowedComponent.prototype.getChannel = function (channel) {
+                FollowedComponent.prototype.getOfflineChannel = function (channel) {
                     var _this = this;
                     this._streamService.getChannel(channel)
-                        .subscribe(function (data) { return _this.channelObjects.push(data); });
+                        .subscribe(function (data) {
+                        data.online = false;
+                        _this.channelObjects.push(data);
+                    });
                 };
-                FollowedComponent.prototype.getChannelsByStatus = function (status) {
+                FollowedComponent.prototype.getChannels = function (option) {
                     var _this = this;
                     this.channelObjects = [];
                     for (var i = 0; i < this.followedChannels.length; i++) {
                         this._streamService.getStream(this.followedChannels[i])
                             .subscribe(function (data) {
-                            if (data[0].stream === null && status === "offline") {
-                                _this.getChannel(data[1]);
+                            if (data[0].stream === null && (option === "offline" || option === "all")) {
+                                _this.getOfflineChannel(data[1]);
                             }
-                            else if (data[0].stream !== null && status === "online") {
+                            else if (data[0].stream !== null && (option === "online" || option === "all")) {
+                                data[0].stream.channel.online = true;
                                 _this.channelObjects.push(data[0].stream.channel);
                             }
                         });

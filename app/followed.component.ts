@@ -21,30 +21,24 @@ export class FollowedComponent {
     followedChannels = ["esl_sc2", "ogamingsc2", "cretetion", "freecodecamp",
                         "storbeck", "habathcx", "robotcaleb", "noobs2ninjas"];
 
-    getAllChannels() {
-
-        this.channelObjects = [];
-        
-        for (var i = 0; i < this.followedChannels.length; i++) {
-            this._streamService.getChannel(this.followedChannels[i])
-                .subscribe(data => this.channelObjects.push(data));
-        }
-    }
-
-    getChannel(channel) {
+    getOfflineChannel(channel) {
         this._streamService.getChannel(channel)
-            .subscribe(data => this.channelObjects.push(data));
+            .subscribe(data => {
+                data.online = false;
+                this.channelObjects.push(data);
+            });
     }
 
-    getChannelsByStatus(status: string) {
+    getChannels(option: string) {
         this.channelObjects = [];
 
         for (var i = 0; i < this.followedChannels.length; i++) {
             this._streamService.getStream(this.followedChannels[i])
                 .subscribe(data => {
-                    if (data[0].stream === null && status === "offline") {
-                        this.getChannel(data[1]);
-                    } else if (data[0].stream !== null && status === "online") {
+                    if (data[0].stream === null && (option === "offline" || option === "all")) {
+                        this.getOfflineChannel(data[1]);
+                    } else if (data[0].stream !== null && (option === "online" || option === "all")) {
+                        data[0].stream.channel.online = true;
                         this.channelObjects.push(data[0].stream.channel);
                     }
                 });
