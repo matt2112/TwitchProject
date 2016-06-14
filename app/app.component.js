@@ -1,4 +1,4 @@
-System.register(['@angular/core', '@angular/http', './featured.component', './followed.component', './stream.service'], function(exports_1, context_1) {
+System.register(['@angular/core', '@angular/http', './featured.component', './followed.component', './custom.component', './stream.service'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['@angular/core', '@angular/http', './featured.component', './fo
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, http_1, featured_component_1, followed_component_1, stream_service_1;
+    var core_1, http_1, featured_component_1, followed_component_1, custom_component_1, stream_service_1;
     var AppComponent;
     return {
         setters:[
@@ -25,6 +25,9 @@ System.register(['@angular/core', '@angular/http', './featured.component', './fo
             },
             function (followed_component_1_1) {
                 followed_component_1 = followed_component_1_1;
+            },
+            function (custom_component_1_1) {
+                custom_component_1 = custom_component_1_1;
             },
             function (stream_service_1_1) {
                 stream_service_1 = stream_service_1_1;
@@ -47,7 +50,8 @@ System.register(['@angular/core', '@angular/http', './featured.component', './fo
                         templateUrl: 'app/app.component.html',
                         directives: [
                             featured_component_1.FeaturedComponent,
-                            followed_component_1.FollowedComponent
+                            followed_component_1.FollowedComponent,
+                            custom_component_1.CustomComponent
                         ],
                         providers: [
                             stream_service_1.StreamService,

@@ -66,7 +66,7 @@
 }
 
 #num {
-    width: 50px;
+    width: 70px;
 }
 
 #featuredOptions {
@@ -121,4 +121,23 @@ a:hover {
 
 .offline {
     background-color: red;
+}
+
+#customOptions {
+    background-color: bisque;
+}
+
+fieldset {
+    padding: 5px;
+}
+
+label {
+    float: left;
+    text-align: right;
+    width: 300px;
+}
+
+input {
+    width: 300px;
+    float: left;
 }

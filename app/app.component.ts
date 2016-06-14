@@ -3,6 +3,7 @@ import { HTTP_PROVIDERS } from '@angular/http';
 
 import { FeaturedComponent } from './featured.component';
 import { FollowedComponent } from './followed.component';
+import { CustomComponent } from './custom.component';
 import { StreamService } from './stream.service';
 
 @Component({
@@ -10,7 +11,8 @@ import { StreamService } from './stream.service';
     templateUrl: 'app/app.component.html',
     directives: [
         FeaturedComponent,
-        FollowedComponent
+        FollowedComponent,
+        CustomComponent
     ],
     providers: [
         StreamService,

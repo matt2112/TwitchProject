@@ -35,4 +35,8 @@ export class StreamService {
         return this._http.get("https://api.twitch.tv/kraken/streams/" + channel)
             .map(res => { return [res.json(), channel]});
     }
+
+    getCustomStreams(game?: string, channels?: string, limit?: number, stream_type?: string, language?: string) {
+        console.log("test");
+    }
 }

@@ -40,6 +40,9 @@ System.register(['@angular/core', '@angular/http', 'rxjs/add/operator/map'], fun
                     return this._http.get("https://api.twitch.tv/kraken/streams/" + channel)
                         .map(function (res) { return [res.json(), channel]; });
                 };
+                StreamService.prototype.getCustomStreams = function (game, channels, limit, stream_type, language) {
+                    console.log("test");
+                };
                 StreamService = __decorate([
                     core_1.Injectable(), 
                     __metadata('design:paramtypes', [http_1.Http])

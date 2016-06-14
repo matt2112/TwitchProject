@@ -1,0 +1,21 @@
+<div id="customOptions" class="row">
+    <form class="col-md-10 col-md-offset-1 text-center" #f="ngForm" (ngSubmit)="getCustomStreams(f.form)">
+        <fieldset class="form-group">
+            <label for="game">Game: </label>
+            <input id="game" type="text" ngControl="game" #game="ngForm">
+        </fieldset>
+        <fieldset class="form-group">
+            <label for="channels">Channels (separate with commas): </label>
+            <input id="channels" type="text" ngControl="channels" #channels="ngForm">
+        </fieldset>
+        <fieldset class="form-group">
+            <label for="limit">Number of results (max 100): </label>
+            <input id="limit" type="number" ngControl="limit" #limit="ngForm">
+        </fieldset>
+        <fieldset class="form-group">
+            <label for="channels">Channels (separate with commas): </label>
+            <input id="channels" type="text" ngControl="channels" #channels="ngForm">
+        </fieldset>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
