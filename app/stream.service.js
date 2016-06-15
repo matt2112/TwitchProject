@@ -41,7 +41,15 @@ System.register(['@angular/core', '@angular/http', 'rxjs/add/operator/map'], fun
                         .map(function (res) { return [res.json(), channel]; });
                 };
                 StreamService.prototype.getCustomStreams = function (game, channels, limit, stream_type, language) {
-                    console.log("test");
+                    console.log(limit);
+                    var url = "https://api.twitch.tv/kraken/streams" + "?game=" + game + "&limit=" + limit
+                        + "&stream_type=" + stream_type + "&language=" + language;
+                    if (channels !== "") {
+                        url += "&channel=" + channels;
+                    }
+                    console.log(url);
+                    return this._http.get(url)
+                        .map(function (res) { return res.json(); });
                 };
                 StreamService = __decorate([
                     core_1.Injectable(), 

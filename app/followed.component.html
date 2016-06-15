@@ -1,7 +1,7 @@
 <div class="row">
-    <div id="all" class="col-md-4 button" (click)="getChannels('all')">All</div>
-    <div id="online" class="col-md-4 button" (click)="getChannels('online')">Online</div>
-    <div id="offline" class="col-md-4 button" (click)="getChannels('offline')">Offline</div>
+    <div id="all" class="col-md-4 button followedOption" (click)="getChannels('all')">All</div>
+    <div id="online" class="col-md-4 button followedOption" (click)="getChannels('online')">Online</div>
+    <div id="offline" class="col-md-4 button followedOption" (click)="getChannels('offline')">Offline</div>
 </div>
 <div *ngFor="let channel of channelObjects">
     <a [href]="channel.url" target="blank">

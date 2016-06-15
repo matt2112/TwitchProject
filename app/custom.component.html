@@ -5,7 +5,7 @@
             <input id="game" type="text" ngControl="game" #game="ngForm">
         </fieldset>
         <fieldset class="form-group">
-            <label for="channels">Channels (separate with commas): </label>
+            <label for="channels">Channels (separate with commas, no spaces): </label>
             <input id="channels" type="text" ngControl="channels" #channels="ngForm">
         </fieldset>
         <fieldset class="form-group">
@@ -13,8 +13,16 @@
             <input id="limit" type="number" ngControl="limit" #limit="ngForm">
         </fieldset>
         <fieldset class="form-group">
-            <label for="channels">Channels (separate with commas): </label>
-            <input id="channels" type="text" ngControl="channels" #channels="ngForm">
+            <label for="streamType">Stream type: </label>
+            <select id="streamType" ngControl="streamType" #streamType="ngForm">
+                <option value="all">All</option>
+                <option value="playlist">Playlist</option>
+                <option value="live">Live</option>
+            </select>
+        </fieldset>
+        <fieldset class="form-group">
+            <label for="language">Language (e.g. en, fr, es-mx etc.): </label>
+            <input id="language" type="text" ngControl="language" #language="ngForm">
         </fieldset>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>

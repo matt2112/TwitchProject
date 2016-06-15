@@ -1,3 +1,7 @@
+body {
+    background-color: lightslategrey;
+}
+
 #mainApp {
     margin-top: 20px;
     margin-bottom: 20px;
@@ -30,6 +34,10 @@
 #followed {
     border-left: 1px solid black;   
     border-right: 1px solid black;    
+}
+
+.followedOption {
+    background-color: bisque;
 }
 
 #online {
@@ -129,15 +137,18 @@ a:hover {
 
 fieldset {
     padding: 5px;
+    margin-top: 10px;
 }
 
 label {
     float: left;
     text-align: right;
     width: 300px;
+    padding-right: 5px;
+
 }
 
-input {
+input, #streamType {
     width: 300px;
     float: left;
 }

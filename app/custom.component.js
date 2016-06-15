@@ -24,9 +24,22 @@ System.register(['@angular/core', './stream.service'], function(exports_1, conte
             CustomComponent = (function () {
                 function CustomComponent(_streamService) {
                     this._streamService = _streamService;
+                    this.streams = [];
+                    this.isLoading = false;
                 }
-                CustomComponent.prototype.getCustomStreams = function (game, channels, limit, stream_type, language) {
-                    this._streamService.getCustomStreams(game, channels, limit, stream_type, language);
+                CustomComponent.prototype.getCustomStreams = function (form) {
+                    this.streams = [];
+                    var game = form.value.game ? form.value.game : "";
+                    var channels = form.value.channels ? form.value.channels : "";
+                    var limit = form.value.limit ? form.value.limit : "";
+                    var stream_type = form.value.streamType ? form.value.streamType : "";
+                    var language = form.value.language ? form.value.language : "";
+                    this.streams = [];
+                    if (parseInt(limit) > 0) {
+                        this.isLoading = true;
+                        this._streamService.getCustomStreams(game, channels, limit, stream_type, language)
+                            .subscribe(function (data) { return console.log(data); });
+                    }
                 };
                 CustomComponent = __decorate([
                     core_1.Component({
