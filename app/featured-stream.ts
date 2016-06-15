@@ -1,4 +1,4 @@
-export class Stream {
+export class FeaturedStream {
     image: string;
     priority: number;
     scheduled: boolean;

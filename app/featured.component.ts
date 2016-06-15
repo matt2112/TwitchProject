@@ -2,8 +2,7 @@ import { Component } from '@angular/core';
 
 import {Observable} from 'rxjs/Rx';
 
-import { Stream } from './stream';
-import { StreamCollection } from './stream-collection';
+import { FeaturedStream } from './featured-stream';
 import { StreamService } from './stream.service'; 
 
 @Component({
@@ -12,7 +11,6 @@ import { StreamService } from './stream.service';
 })
 export class FeaturedComponent {
     
-    data: StreamCollection;
     num: string;
     isLoading = false;
 
@@ -32,7 +30,7 @@ export class FeaturedComponent {
                 data => {
                     this.isLoading = false;
                     for (var i = 0; i < data.featured.length; i++) {
-                        var newStream = new Stream;
+                        var newStream = new FeaturedStream;
                         newStream.title = data.featured[i]["title"];
                         newStream.text = data.featured[i]["text"];
                         newStream.image = data.featured[i]["image"];

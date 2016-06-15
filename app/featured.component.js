@@ -1,4 +1,4 @@
-System.register(['@angular/core', './stream', './stream.service'], function(exports_1, context_1) {
+System.register(['@angular/core', './featured-stream', './stream.service'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,15 +10,15 @@ System.register(['@angular/core', './stream', './stream.service'], function(expo
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, stream_1, stream_service_1;
+    var core_1, featured_stream_1, stream_service_1;
     var FeaturedComponent;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
             },
-            function (stream_1_1) {
-                stream_1 = stream_1_1;
+            function (featured_stream_1_1) {
+                featured_stream_1 = featured_stream_1_1;
             },
             function (stream_service_1_1) {
                 stream_service_1 = stream_service_1_1;
@@ -40,7 +40,7 @@ System.register(['@angular/core', './stream', './stream.service'], function(expo
                             .subscribe(function (data) {
                             _this.isLoading = false;
                             for (var i = 0; i < data.featured.length; i++) {
-                                var newStream = new stream_1.Stream;
+                                var newStream = new featured_stream_1.FeaturedStream;
                                 newStream.title = data.featured[i]["title"];
                                 newStream.text = data.featured[i]["text"];
                                 newStream.image = data.featured[i]["image"];

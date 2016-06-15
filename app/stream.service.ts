@@ -4,8 +4,7 @@ import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
-import { Stream } from './stream';
-import { StreamCollection } from './stream-collection';
+import { FeaturedStream } from './featured-stream';
 
 @Injectable()
 export class StreamService {
@@ -13,7 +12,7 @@ export class StreamService {
     constructor(private _http: Http) {        
     }
     
-    getFeaturedStreams(limit: string) : Observable<StreamCollection> {
+    getFeaturedStreams(limit: string) : Observable<any> {
         
         var url = "https://api.twitch.tv/kraken/streams/featured";
         

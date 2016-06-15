@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 
 import {Observable} from 'rxjs/Rx';
 
-import { Stream } from './stream';
-import { StreamCollection } from './stream-collection';
 import { StreamService } from './stream.service'; 
 
 @Component({

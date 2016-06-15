@@ -1,17 +1,17 @@
 System.register([], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
-    var Stream;
+    var Channel;
     return {
         setters:[],
         execute: function() {
-            Stream = (function () {
-                function Stream() {
+            Channel = (function () {
+                function Channel() {
                 }
-                return Stream;
+                return Channel;
             }());
-            exports_1("Stream", Stream);
+            exports_1("Channel", Channel);
         }
     }
 });
-//# sourceMappingURL=stream.js.map
+//# sourceMappingURL=channel.js.map
