@@ -1,6 +1,6 @@
 <div id="featuredOptions" class="row">
-    <form id="number" class="col-md-8 col-md-offset-2 form-inline text-center" #f="ngForm" (ngSubmit)="getStreams(f.form)">
-        <label for="num">Number of results (max 100): </label>
+    <form id="number" class="" #f="ngForm" (ngSubmit)="getStreams(f.form)">
+        <label id="numLabel" for="num">Number of results (max 100): </label>
         <input id="num" type="number" class="form-control" ngControl="num" #num="ngForm">
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
