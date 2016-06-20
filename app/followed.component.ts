@@ -17,7 +17,7 @@ export class FollowedComponent {
     channelObjects = [];
 
     followedChannels = ["esl_sc2", "ogamingsc2", "cretetion", "freecodecamp",
-                        "storbeck", "habathcx", "robotcaleb", "noobs2ninjas"];
+                        "storbeck", "habathcx", "robotcaleb", "noobs2ninjas", "brunofin"];
 
     getOfflineChannel(channel) {
         this._streamService.getChannel(channel)
@@ -33,6 +33,7 @@ export class FollowedComponent {
         for (var i = 0; i < this.followedChannels.length; i++) {
             this._streamService.getStream(this.followedChannels[i])
                 .subscribe(data => {
+                    console.log(data);
                     if (data[0].stream === null && (option === "offline" || option === "all")) {
                         this.getOfflineChannel(data[1]);
                     } else if (data[0].stream !== null && (option === "online" || option === "all")) {

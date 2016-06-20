@@ -26,7 +26,7 @@ System.register(['@angular/core', './stream.service'], function(exports_1, conte
                     this._streamService = _streamService;
                     this.channelObjects = [];
                     this.followedChannels = ["esl_sc2", "ogamingsc2", "cretetion", "freecodecamp",
-                        "storbeck", "habathcx", "robotcaleb", "noobs2ninjas"];
+                        "storbeck", "habathcx", "robotcaleb", "noobs2ninjas", "brunofin"];
                 }
                 FollowedComponent.prototype.getOfflineChannel = function (channel) {
                     var _this = this;
@@ -42,6 +42,7 @@ System.register(['@angular/core', './stream.service'], function(exports_1, conte
                     for (var i = 0; i < this.followedChannels.length; i++) {
                         this._streamService.getStream(this.followedChannels[i])
                             .subscribe(function (data) {
+                            console.log(data);
                             if (data[0].stream === null && (option === "offline" || option === "all")) {
                                 _this.getOfflineChannel(data[1]);
                             }

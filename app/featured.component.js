@@ -43,7 +43,12 @@ System.register(['@angular/core', './featured-stream', './stream.service'], func
                                 var newStream = new featured_stream_1.FeaturedStream;
                                 newStream.title = data.featured[i]["title"];
                                 newStream.text = data.featured[i]["text"];
+                                var idx = newStream.text.indexOf("<\/p>");
+                                newStream.text = newStream.text.substring(0, idx);
                                 newStream.image = data.featured[i]["image"];
+                                console.log(data);
+                                //newStream.stream.channel.url = data.featured[i].stream.channel.url;
+                                //console.log(newStream.stream.channel.url);
                                 _this.streams.push(newStream);
                             }
                         });

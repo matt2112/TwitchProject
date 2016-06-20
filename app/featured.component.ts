@@ -3,6 +3,8 @@ import { Component } from '@angular/core';
 import {Observable} from 'rxjs/Rx';
 
 import { FeaturedStream } from './featured-stream';
+import { Channel } from './channel';
+import { Stream } from './stream';
 import { StreamService } from './stream.service'; 
 
 @Component({
@@ -33,7 +35,12 @@ export class FeaturedComponent {
                         var newStream = new FeaturedStream;
                         newStream.title = data.featured[i]["title"];
                         newStream.text = data.featured[i]["text"];
+                        var idx = newStream.text.indexOf("<\/p>");
+                        newStream.text = newStream.text.substring(0, idx);
                         newStream.image = data.featured[i]["image"];
+                        console.log(data);
+                        //newStream.stream.channel.url = data.featured[i].stream.channel.url;
+                        //console.log(newStream.stream.channel.url);
                         this.streams.push(newStream);
                     }
                 });

@@ -6,16 +6,18 @@
     </form>
 </div>
 
-<div id="loadDiv" *ngIf="isLoading" class="row">
-    <i id="loadIcon" class="fa fa-spinner fa-pulse fa-4x col-md-offset-5 col-md-2" aria-hidden="true"></i>
+<div id="loadDiv" *ngIf="isLoading">
+    <i id="loadIcon" class="fa fa-spinner fa-4x fa-pulse" aria-hidden="true"></i>
 </div>
 
-<div class="row">
-    <div class="stream" *ngFor="let stream of streams">
-        <img class="streamIcon" [src]="stream.image">
-        <div>
-            <h4 class="title">{{stream.title}}</h4>
-            <p [innerHTML]="stream.text"></p>
-        <div>
-    </div>
+<div *ngFor="let stream of streams">
+    <!--<a [href]="stream.stream.channel.url" target="blank">-->
+        <div class="row stream">
+            <img class="streamIcon col-md-2" [src]="stream.image">
+            <div class="col-md-9">
+                <h4 class="title">{{stream.title}}</h4>
+                <p [innerHTML]="stream.text"></p>
+            </div>
+        </div>
+    <!--</a>-->
 </div>

@@ -1,7 +1,7 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto+Slab);
 
 body {
-    background-color: lightslategrey;
+    background: linear-gradient( #b8b894, lightslategrey);
     font-family: 'Roboto Slab', serif;
 }
 
@@ -103,7 +103,7 @@ body {
 }
 
 .stream {
-    background-color: lightcoral;
+    background-color: #fff;
     border-bottom: 2px solid black;
     border-left: 2px solid black;
     padding: 10px;
@@ -127,7 +127,7 @@ body {
 }
 
 .channel {
-    background-color: darkcyan;
+    background-color: #9a7fcc;
     border-bottom: 2px solid black;
     border-left: 2px solid black;
 }
@@ -162,14 +162,14 @@ a:hover {
 .onlineStatus {
     height: 20px;
     width: 20px;
-    border: 1px solid black;
     border-radius: 50%;
     float: right;
     margin: 40px 20px 40px 0px;
+    box-shadow: 0px 0px 1px 1px dimgrey;
 }
 
 .online {
-    background-color: green;
+    background-color: #2fb62f;
 }
 
 .offline {
@@ -207,10 +207,9 @@ fieldset {
 }
 
 #loadDiv {
-    height: 300px;
+    text-align: center;
+    padding: 80px;
 }
-
 #loadIcon {
-    padding: 100px;
-    color: red;
+    color: #6441A4;
 }
