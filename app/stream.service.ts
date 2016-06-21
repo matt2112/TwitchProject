@@ -3,6 +3,9 @@ import { Http } from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/do';
+import 'rxjs/add/observable/throw';
 
 import { FeaturedStream } from './featured-stream';
 
@@ -30,9 +33,20 @@ export class StreamService {
 
     }
 
+    private handleError (error: any) {
+
+        let errMsg = (error.message) ? error.message :
+            error.status ? `${error.status} - ${error.statusText}` : 'Server error';
+        return Observable.throw(errMsg);
+    }
+
     getStream(channel: string) {
+
         return this._http.get("https://api.twitch.tv/kraken/streams/" + channel)
-            .map(res => { return [res.json(), channel]});
+            .map(res => {
+                return [res.json(), channel]
+            })
+            .catch(this.handleError);
     }
 
     getCustomStreams(game: string, channels: string, limit: number, stream_type: string, language: string) {

@@ -27,6 +27,7 @@ System.register(['@angular/core', './stream.service'], function(exports_1, conte
                     this.channelObjects = [];
                     this.followedChannels = ["esl_sc2", "ogamingsc2", "cretetion", "freecodecamp",
                         "storbeck", "habathcx", "robotcaleb", "noobs2ninjas", "brunofin"];
+                    this.errorMessage = "";
                 }
                 FollowedComponent.prototype.getOfflineChannel = function (channel) {
                     var _this = this;
@@ -36,21 +37,23 @@ System.register(['@angular/core', './stream.service'], function(exports_1, conte
                         _this.channelObjects.push(data);
                     });
                 };
+                FollowedComponent.prototype.handleData = function (option, data) {
+                    if (data[0]) {
+                        if (data[0].stream === null && (option === "offline" || option === "all")) {
+                            this.getOfflineChannel(data[1]);
+                        }
+                        else if (data[0].stream !== null && (option === "online" || option === "all")) {
+                            data[0].stream.channel.online = true;
+                            this.channelObjects.push(data[0].stream.channel);
+                        }
+                    }
+                };
                 FollowedComponent.prototype.getChannels = function (option) {
                     var _this = this;
                     this.channelObjects = [];
                     for (var i = 0; i < this.followedChannels.length; i++) {
                         this._streamService.getStream(this.followedChannels[i])
-                            .subscribe(function (data) {
-                            console.log(data);
-                            if (data[0].stream === null && (option === "offline" || option === "all")) {
-                                _this.getOfflineChannel(data[1]);
-                            }
-                            else if (data[0].stream !== null && (option === "online" || option === "all")) {
-                                data[0].stream.channel.online = true;
-                                _this.channelObjects.push(data[0].stream.channel);
-                            }
-                        });
+                            .subscribe(function (data) { return _this.handleData(option, data); }, function (error) { return console.log("test" + error); });
                     }
                 };
                 FollowedComponent = __decorate([
