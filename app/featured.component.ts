@@ -32,15 +32,22 @@ export class FeaturedComponent {
                 data => {
                     this.isLoading = false;
                     for (var i = 0; i < data.featured.length; i++) {
+                        // create new FeaturedStream object and add title and image
                         var newStream = new FeaturedStream;
                         newStream.title = data.featured[i]["title"];
-                        newStream.text = data.featured[i]["text"];
-                        var idx = newStream.text.indexOf("<\/p>");
-                        newStream.text = newStream.text.substring(0, idx);
                         newStream.image = data.featured[i]["image"];
-                        console.log(data);
-                        //newStream.stream.channel.url = data.featured[i].stream.channel.url;
-                        //console.log(newStream.stream.channel.url);
+                        
+                        // get index of first closing p tag and throw away all data after that
+                        var text = data.featured[i]["text"];
+                        var idx = text.indexOf("<\/p>");
+                        newStream.text = text.substring(0, idx);
+                        
+                        // create new Stream and Channel objects, chain together and add to FeaturedStream object
+                        newStream.stream = new Stream;
+                        newStream.stream.channel = new Channel;
+                        newStream.stream.channel.url = data.featured[i].stream.channel.url;
+
+                        // add FeaturedStream object to array of streams, ready to be displayed
                         this.streams.push(newStream);
                     }
                 });

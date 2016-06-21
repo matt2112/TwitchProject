@@ -11,7 +11,7 @@
 </div>
 
 <div *ngFor="let stream of streams">
-    <!--<a [href]="stream.stream.channel.url" target="blank">-->
+    <a [href]="stream.stream.channel.url" target="blank">
         <div class="row stream">
             <img class="streamIcon col-md-2" [src]="stream.image">
             <div class="col-md-9">
@@ -19,5 +19,5 @@
                 <p [innerHTML]="stream.text"></p>
             </div>
         </div>
-    <!--</a>-->
+    </a>
 </div>

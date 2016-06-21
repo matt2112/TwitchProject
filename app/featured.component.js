@@ -1,4 +1,4 @@
-System.register(['@angular/core', './featured-stream', './stream.service'], function(exports_1, context_1) {
+System.register(['@angular/core', './featured-stream', './channel', './stream', './stream.service'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['@angular/core', './featured-stream', './stream.service'], func
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, featured_stream_1, stream_service_1;
+    var core_1, featured_stream_1, channel_1, stream_1, stream_service_1;
     var FeaturedComponent;
     return {
         setters:[
@@ -19,6 +19,12 @@ System.register(['@angular/core', './featured-stream', './stream.service'], func
             },
             function (featured_stream_1_1) {
                 featured_stream_1 = featured_stream_1_1;
+            },
+            function (channel_1_1) {
+                channel_1 = channel_1_1;
+            },
+            function (stream_1_1) {
+                stream_1 = stream_1_1;
             },
             function (stream_service_1_1) {
                 stream_service_1 = stream_service_1_1;
@@ -40,15 +46,19 @@ System.register(['@angular/core', './featured-stream', './stream.service'], func
                             .subscribe(function (data) {
                             _this.isLoading = false;
                             for (var i = 0; i < data.featured.length; i++) {
+                                // create new FeaturedStream object and add title and image
                                 var newStream = new featured_stream_1.FeaturedStream;
                                 newStream.title = data.featured[i]["title"];
-                                newStream.text = data.featured[i]["text"];
-                                var idx = newStream.text.indexOf("<\/p>");
-                                newStream.text = newStream.text.substring(0, idx);
                                 newStream.image = data.featured[i]["image"];
-                                console.log(data);
-                                //newStream.stream.channel.url = data.featured[i].stream.channel.url;
-                                //console.log(newStream.stream.channel.url);
+                                // get index of first closing p tag and throw away all data after that
+                                var text = data.featured[i]["text"];
+                                var idx = text.indexOf("<\/p>");
+                                newStream.text = text.substring(0, idx);
+                                // create new Stream and Channel objects, chain together and add to FeaturedStream object
+                                newStream.stream = new stream_1.Stream;
+                                newStream.stream.channel = new channel_1.Channel;
+                                newStream.stream.channel.url = data.featured[i].stream.channel.url;
+                                // add FeaturedStream object to array of streams, ready to be displayed
                                 _this.streams.push(newStream);
                             }
                         });

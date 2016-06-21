@@ -96,14 +96,9 @@ body {
     background-color: #6441A4;
 }
 
-#searchbar {
-    padding: 10px;
-    height: 60px;
-    background-color: lightblue;
-}
-
 .stream {
     background-color: #fff;
+    color: #6441A4;
     border-bottom: 2px solid black;
     border-left: 2px solid black;
     padding: 10px;
