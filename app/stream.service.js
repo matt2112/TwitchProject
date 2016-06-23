@@ -58,7 +58,7 @@ System.register(['@angular/core', '@angular/http', 'rxjs/Observable', 'rxjs/add/
                 };
                 // Gets data of custom streams using optional parameters.
                 StreamService.prototype.getCustomStreams = function (game, channels, limit, stream_type, language) {
-                    var url = "https://api.twitch.tv/kraken/streams" + "?game=" + game + "&limit=" + limit
+                    var url = "https://api.twitch.tv/kraken/streams?game=" + game + "&limit=" + limit
                         + "&stream_type=" + stream_type + "&language=" + language;
                     if (channels !== "") {
                         url += "&channel=" + channels;

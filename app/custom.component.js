@@ -33,7 +33,7 @@ System.register(['@angular/core', './stream.service'], function(exports_1, conte
                     this.channelObjects = [];
                     var game = form.value.game ? form.value.game : "";
                     var channels = form.value.channels ? form.value.channels : "";
-                    var limit = form.value.limit ? form.value.limit : "";
+                    var limit = form.value.limit ? form.value.limit : form.value.channels ? 100 : "";
                     var stream_type = form.value.streamType ? form.value.streamType : "";
                     var language = form.value.language ? form.value.language : "";
                     if (parseInt(limit) > 0) {
