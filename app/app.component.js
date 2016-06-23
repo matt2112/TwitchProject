@@ -36,6 +36,7 @@ System.register(['@angular/core', '@angular/http', './featured.component', './fo
             AppComponent = (function () {
                 function AppComponent() {
                 }
+                // Changes view based on option selection.
                 AppComponent.prototype.changeOptions = function (newOption) {
                     if (newOption !== this.option) {
                         this.option = newOption;

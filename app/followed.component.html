@@ -3,6 +3,18 @@
     <div id="online" class="col-md-4 button followedOption" (click)="getChannels('online')">Online</div>
     <div id="offline" class="col-md-4 button followedOption" (click)="getChannels('offline')">Offline</div>
 </div>
+
+<div id="changeChannels" class="row">
+    <form id="addChannel" class="changeChannel col-md-6 form-inline" #f1="ngForm" (ngSubmit)="addChannel(f1.form)">
+        <input type="text" class="form-control" ngControl="add" #add="ngForm">
+        <button type="submit" id="add" class="btn">Add Channel</button>
+    </form>
+    <form id="removeChannel" class="changeChannel col-md-6 form-inline" #f2="ngForm" (ngSubmit)="removeChannel(f2.form)">
+        <input type="text" class="form-control" ngControl="remove" #remove="ngForm">
+        <button type="submit" id="remove" class="btn">Remove Channel</button>
+    </form>
+</div>
+
 <div *ngFor="let channel of channelObjects">
     <a [href]="channel.url" target="blank">
         <div class="channel row">
@@ -21,5 +33,9 @@
 </div>
 
 <div *ngFor="let error of errorObjects">
-    <p>{{ error }}</p>
+    <div class="error row">
+        <p>Error: {{ error.error }}</p>
+        <p>Status: {{ error.status }}</p>
+        <p>Message: {{ error.message }}</p>
+    </div>
 </div>

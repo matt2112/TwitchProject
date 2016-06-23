@@ -1,21 +1,17 @@
 <div id="mainApp" class="container">
+
     <div class="row">
         <div id="header" class="col-md-12">
             freeCodeCamp TwitchTV App
         </div>
     </div>
+
     <div class="row" id="buttons">
         <div id="featured" class="col-md-4 button" (click)="changeOptions('featured')">Featured Streams</div>
         <div id="followed" class="col-md-4 button" (click)="changeOptions('followed')">Followed Channels</div>
         <div id="custom" class="col-lmd-4 button" (click)="changeOptions('custom')">Custom Search</div>
     </div>
-    <!--
-    <div class="row">
-        <div id="searchbar" class="col-md-12">
-            <input type="text" class="form-control" placeholder="Search for stream...">
-        </div>
-    </div>
-    -->
+
     <div *ngIf="option === 'featured'">
         <featured></featured>
     </div>
@@ -25,4 +21,5 @@
         <div *ngIf="option === 'custom'">
         <custom></custom>
     </div>
+    
 </div>

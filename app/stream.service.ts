@@ -4,7 +4,6 @@ import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/do';
 import 'rxjs/add/observable/throw';
 
 import { FeaturedStream } from './featured-stream';
@@ -15,6 +14,7 @@ export class StreamService {
     constructor(private _http: Http) {        
     }
     
+    // Gets streams as featured by Twitch API.
     getFeaturedStreams(limit: string) : Observable<any> {
         
         var url = "https://api.twitch.tv/kraken/streams/featured";
@@ -26,6 +26,7 @@ export class StreamService {
 
     }
     
+    // Gets data about a single channel and converts to json format.
     getChannel(channel: string) {
         
         return this._http.get("https://api.twitch.tv/kraken/channels/" + channel)
@@ -33,16 +34,16 @@ export class StreamService {
 
     }
 
+    // Handles any errors and returns an Observable which can be processed by a subscribe method.
     private handleError (error: any) {
 
         let errMsg = error._body;
-        
-        //(error.message) ? error.message :
-          //  error.status ? `${error.status} - ${error.statusText}` : 'Server error';
 
         return Observable.throw(errMsg);
+
     }
 
+    // Gets data about a single stream and converts to json format. Also returns name of channel. 
     getStream(channel: string) {
 
         return this._http.get("https://api.twitch.tv/kraken/streams/" + channel)
@@ -50,8 +51,10 @@ export class StreamService {
                 return [res.json(), channel]
             })
             .catch(this.handleError);
+
     }
 
+    // Gets data of custom streams using optional parameters.
     getCustomStreams(game: string, channels: string, limit: number, stream_type: string, language: string) {
 
         var url = "https://api.twitch.tv/kraken/streams" + "?game=" + game + "&limit=" + limit
@@ -64,4 +67,5 @@ export class StreamService {
         return this._http.get(url)
             .map(res => res.json());
     }
+    
 }

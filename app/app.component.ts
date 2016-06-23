@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { HTTP_PROVIDERS } from '@angular/http';
 
 import { FeaturedComponent } from './featured.component';
@@ -20,11 +20,10 @@ import { StreamService } from './stream.service';
     ]
 })
 export class AppComponent {
-    //@ViewChild(FeaturedListComponent) featuredList : FeaturedListComponent;
-    //@ViewChild(FollowedComponent) followedList : FollowedComponent;
     
     option: string;
     
+    // Changes view based on option selection.
     changeOptions(newOption) {
         if (newOption !== this.option) {
             this.option = newOption;

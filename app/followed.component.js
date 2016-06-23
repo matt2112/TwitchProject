@@ -25,10 +25,28 @@ System.register(['@angular/core', './stream.service'], function(exports_1, conte
                 function FollowedComponent(_streamService) {
                     this._streamService = _streamService;
                     this.channelObjects = [];
-                    this.followedChannels = ["esl_sc2", "ogamingsc2", "cretetion", "freecodecamp",
-                        "storbeck", "habathcx", "robotcaleb", "noobs2ninjas", "brunofin"];
                     this.errorObjects = [];
+                    this.followedChannels = ["esl_sc2", "ogamingsc2", "cretetion", "freecodecamp", "storbeck",
+                        "habathcx", "robotcaleb", "noobs2ninjas", "brunofin", "comster404"];
                 }
+                // Adds channel string to followedChannels array if not already present.
+                FollowedComponent.prototype.addChannel = function (form) {
+                    var addMe = form.value.add;
+                    if (this.followedChannels.indexOf(addMe) === -1) {
+                        this.followedChannels.push(addMe);
+                        this.getChannels("all");
+                    }
+                };
+                // Removes channel string from followedChannels array if not present.
+                FollowedComponent.prototype.removeChannel = function (form) {
+                    var removeMe = form.value.remove;
+                    var idx = this.followedChannels.indexOf(removeMe);
+                    if (idx >= 0) {
+                        this.followedChannels.splice(idx, 1);
+                        this.getChannels("all");
+                    }
+                };
+                // Gets channel data when live stream unavailable.
                 FollowedComponent.prototype.getOfflineChannel = function (channel) {
                     var _this = this;
                     this._streamService.getChannel(channel)
@@ -37,8 +55,10 @@ System.register(['@angular/core', './stream.service'], function(exports_1, conte
                         _this.channelObjects.push(data);
                     });
                 };
+                // Processes Observable returned from service via getChannels method.
                 FollowedComponent.prototype.handleData = function (option, data) {
                     if (data[0]) {
+                        // If stream data unavailable then use getOfflineChannel method to get data instead. 
                         if (data[0].stream === null && (option === "offline" || option === "all")) {
                             this.getOfflineChannel(data[1]);
                         }
@@ -48,17 +68,16 @@ System.register(['@angular/core', './stream.service'], function(exports_1, conte
                         }
                     }
                 };
+                // Processes error strings.
                 FollowedComponent.prototype.handleError = function (error) {
-                    var newError = {
-                        err: error.match(/"error":"(.*)message/)[1].slice(0, -3),
-                        status: error.match(/"status":(\d*)/)[1],
-                        message: error.match(/Channel.*unavailable/)[0]
-                    };
+                    var newError = JSON.parse(error);
                     this.errorObjects.push(newError);
                 };
+                // Removes old data and subscribes to service using all, online or offline options.
                 FollowedComponent.prototype.getChannels = function (option) {
                     var _this = this;
                     this.channelObjects = [];
+                    this.errorObjects = [];
                     for (var i = 0; i < this.followedChannels.length; i++) {
                         this._streamService.getStream(this.followedChannels[i])
                             .subscribe(function (data) { return _this.handleData(option, data); }, function (error) { return _this.handleError(error); });

@@ -15,6 +15,7 @@ export class CustomComponent {
         private _streamService: StreamService) {
     }
 
+    // Obtains custom stream using parameters inputted via html form.
     getCustomStreams(form) {
 
         this.channelObjects = [];
@@ -25,13 +26,11 @@ export class CustomComponent {
         var stream_type = form.value.streamType ? form.value.streamType : "";
         var language = form.value.language ? form.value.language : "";
 
-        this.channelObjects = [];
         if (parseInt(limit) > 0) {
             this.isLoading = true;
             this._streamService.getCustomStreams(game, channels, limit, stream_type, language)
                 .subscribe(
                     data => {
-                        console.log(data);
                         this.isLoading = false;
                         for (var i = 0; i < data.streams.length; i++) {
                             this.channelObjects.push(data.streams[i].channel);

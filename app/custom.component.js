@@ -27,6 +27,7 @@ System.register(['@angular/core', './stream.service'], function(exports_1, conte
                     this.channelObjects = [];
                     this.isLoading = false;
                 }
+                // Obtains custom stream using parameters inputted via html form.
                 CustomComponent.prototype.getCustomStreams = function (form) {
                     var _this = this;
                     this.channelObjects = [];
@@ -35,12 +36,10 @@ System.register(['@angular/core', './stream.service'], function(exports_1, conte
                     var limit = form.value.limit ? form.value.limit : "";
                     var stream_type = form.value.streamType ? form.value.streamType : "";
                     var language = form.value.language ? form.value.language : "";
-                    this.channelObjects = [];
                     if (parseInt(limit) > 0) {
                         this.isLoading = true;
                         this._streamService.getCustomStreams(game, channels, limit, stream_type, language)
                             .subscribe(function (data) {
-                            console.log(data);
                             _this.isLoading = false;
                             for (var i = 0; i < data.streams.length; i++) {
                                 _this.channelObjects.push(data.streams[i].channel);

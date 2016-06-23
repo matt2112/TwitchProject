@@ -1,4 +1,4 @@
-System.register(['@angular/core', '@angular/http', 'rxjs/Observable', 'rxjs/add/operator/map', 'rxjs/add/operator/catch', 'rxjs/add/operator/do', 'rxjs/add/observable/throw'], function(exports_1, context_1) {
+System.register(['@angular/core', '@angular/http', 'rxjs/Observable', 'rxjs/add/operator/map', 'rxjs/add/operator/catch', 'rxjs/add/observable/throw'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -25,29 +25,30 @@ System.register(['@angular/core', '@angular/http', 'rxjs/Observable', 'rxjs/add/
             },
             function (_1) {},
             function (_2) {},
-            function (_3) {},
-            function (_4) {}],
+            function (_3) {}],
         execute: function() {
             StreamService = (function () {
                 function StreamService(_http) {
                     this._http = _http;
                 }
+                // Gets streams as featured by Twitch API.
                 StreamService.prototype.getFeaturedStreams = function (limit) {
                     var url = "https://api.twitch.tv/kraken/streams/featured";
                     var limit = "?limit=" + limit;
                     return this._http.get(url + limit)
                         .map(function (res) { return res.json(); });
                 };
+                // Gets data about a single channel and converts to json format.
                 StreamService.prototype.getChannel = function (channel) {
                     return this._http.get("https://api.twitch.tv/kraken/channels/" + channel)
                         .map(function (res) { return res.json(); });
                 };
+                // Handles any errors and returns an Observable which can be processed by a subscribe method.
                 StreamService.prototype.handleError = function (error) {
                     var errMsg = error._body;
-                    //(error.message) ? error.message :
-                    //  error.status ? `${error.status} - ${error.statusText}` : 'Server error';
                     return Observable_1.Observable.throw(errMsg);
                 };
+                // Gets data about a single stream and converts to json format. Also returns name of channel. 
                 StreamService.prototype.getStream = function (channel) {
                     return this._http.get("https://api.twitch.tv/kraken/streams/" + channel)
                         .map(function (res) {
@@ -55,6 +56,7 @@ System.register(['@angular/core', '@angular/http', 'rxjs/Observable', 'rxjs/add/
                     })
                         .catch(this.handleError);
                 };
+                // Gets data of custom streams using optional parameters.
                 StreamService.prototype.getCustomStreams = function (game, channels, limit, stream_type, language) {
                     var url = "https://api.twitch.tv/kraken/streams" + "?game=" + game + "&limit=" + limit
                         + "&stream_type=" + stream_type + "&language=" + language;
