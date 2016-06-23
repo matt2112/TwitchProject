@@ -43,8 +43,9 @@ System.register(['@angular/core', '@angular/http', 'rxjs/Observable', 'rxjs/add/
                         .map(function (res) { return res.json(); });
                 };
                 StreamService.prototype.handleError = function (error) {
-                    var errMsg = (error.message) ? error.message :
-                        error.status ? error.status + " - " + error.statusText : 'Server error';
+                    var errMsg = error._body;
+                    //(error.message) ? error.message :
+                    //  error.status ? `${error.status} - ${error.statusText}` : 'Server error';
                     return Observable_1.Observable.throw(errMsg);
                 };
                 StreamService.prototype.getStream = function (channel) {
@@ -55,13 +56,11 @@ System.register(['@angular/core', '@angular/http', 'rxjs/Observable', 'rxjs/add/
                         .catch(this.handleError);
                 };
                 StreamService.prototype.getCustomStreams = function (game, channels, limit, stream_type, language) {
-                    console.log(limit);
                     var url = "https://api.twitch.tv/kraken/streams" + "?game=" + game + "&limit=" + limit
                         + "&stream_type=" + stream_type + "&language=" + language;
                     if (channels !== "") {
                         url += "&channel=" + channels;
                     }
-                    console.log(url);
                     return this._http.get(url)
                         .map(function (res) { return res.json(); });
                 };

@@ -27,7 +27,7 @@ System.register(['@angular/core', './stream.service'], function(exports_1, conte
                     this.channelObjects = [];
                     this.followedChannels = ["esl_sc2", "ogamingsc2", "cretetion", "freecodecamp",
                         "storbeck", "habathcx", "robotcaleb", "noobs2ninjas", "brunofin"];
-                    this.errorMessage = "";
+                    this.errorObjects = [];
                 }
                 FollowedComponent.prototype.getOfflineChannel = function (channel) {
                     var _this = this;
@@ -48,12 +48,20 @@ System.register(['@angular/core', './stream.service'], function(exports_1, conte
                         }
                     }
                 };
+                FollowedComponent.prototype.handleError = function (error) {
+                    var newError = {
+                        err: error.match(/"error":"(.*)message/)[1].slice(0, -3),
+                        status: error.match(/"status":(\d*)/)[1],
+                        message: error.match(/Channel.*unavailable/)[0]
+                    };
+                    this.errorObjects.push(newError);
+                };
                 FollowedComponent.prototype.getChannels = function (option) {
                     var _this = this;
                     this.channelObjects = [];
                     for (var i = 0; i < this.followedChannels.length; i++) {
                         this._streamService.getStream(this.followedChannels[i])
-                            .subscribe(function (data) { return _this.handleData(option, data); }, function (error) { return console.log("test" + error); });
+                            .subscribe(function (data) { return _this.handleData(option, data); }, function (error) { return _this.handleError(error); });
                     }
                 };
                 FollowedComponent = __decorate([

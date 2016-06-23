@@ -19,7 +19,7 @@ export class FollowedComponent {
     followedChannels = ["esl_sc2", "ogamingsc2", "cretetion", "freecodecamp",
                         "storbeck", "habathcx", "robotcaleb", "noobs2ninjas", "brunofin"]; 
     
-    errorMessage = "";
+    errorObjects = [];
 
     getOfflineChannel(channel) {
         this._streamService.getChannel(channel)
@@ -40,6 +40,15 @@ export class FollowedComponent {
         }
     }
 
+    handleError(error) {
+        var newError = {
+            err: error.match(/"error":"(.*)message/)[1].slice(0, -3),
+            status: error.match(/"status":(\d*)/)[1],
+            message: error.match(/Channel.*unavailable/)[0]
+        };
+        this.errorObjects.push(newError);
+    }
+
     getChannels(option: string) {
         this.channelObjects = [];
 
@@ -47,7 +56,7 @@ export class FollowedComponent {
             this._streamService.getStream(this.followedChannels[i])
                 .subscribe(
                     data => this.handleData(option, data),
-                    error =>  console.log("test" + error)
+                    error =>  this.handleError(error)
                 );
         }
     }
