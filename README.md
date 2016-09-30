@@ -1,5 +1,5 @@
 # Twitch Interface
-TwitchTV app developed using Angular 2 as part of FreeCodeCamp curriculum.
+TwitchTV app developed using Angular 2 and TypeScript.
 
 This is the fourth intermediate project in the freeCodeCamp curriculum. The rules can be viewed here:
 https://www.freecodecamp.com/challenges/use-the-twitchtv-json-api
