@@ -30,17 +30,17 @@ System.register(['@angular/core', '@angular/http', 'rxjs/Observable', 'rxjs/add/
             StreamService = (function () {
                 function StreamService(_http) {
                     this._http = _http;
+                    this.clientid = "q7wctgvg9bz3kd0srxrecx57i6izxa2";
                 }
                 // Gets streams as featured by Twitch API.
                 StreamService.prototype.getFeaturedStreams = function (limit) {
                     var url = "https://api.twitch.tv/kraken/streams/featured";
-                    var limit = "?limit=" + limit;
-                    return this._http.get(url + limit)
+                    return this._http.get(url + "?limit=" + limit + "&client_id=" + this.clientid)
                         .map(function (res) { return res.json(); });
                 };
                 // Gets data about a single channel and converts to json format.
                 StreamService.prototype.getChannel = function (channel) {
-                    return this._http.get("https://api.twitch.tv/kraken/channels/" + channel)
+                    return this._http.get("https://api.twitch.tv/kraken/channels/" + channel + "?client_id=" + this.clientid)
                         .map(function (res) { return res.json(); });
                 };
                 // Handles any errors and returns an Observable which can be processed by a subscribe method.
@@ -50,7 +50,7 @@ System.register(['@angular/core', '@angular/http', 'rxjs/Observable', 'rxjs/add/
                 };
                 // Gets data about a single stream and converts to json format. Also returns name of channel. 
                 StreamService.prototype.getStream = function (channel) {
-                    return this._http.get("https://api.twitch.tv/kraken/streams/" + channel)
+                    return this._http.get("https://api.twitch.tv/kraken/streams/" + channel + "?client_id=" + this.clientid)
                         .map(function (res) {
                         return [res.json(), channel];
                     })
@@ -59,7 +59,7 @@ System.register(['@angular/core', '@angular/http', 'rxjs/Observable', 'rxjs/add/
                 // Gets data of custom streams using optional parameters.
                 StreamService.prototype.getCustomStreams = function (game, channels, limit, stream_type, language) {
                     var url = "https://api.twitch.tv/kraken/streams?game=" + game + "&limit=" + limit
-                        + "&stream_type=" + stream_type + "&language=" + language;
+                        + "&stream_type=" + stream_type + "&language=" + language + "&client_id=" + this.clientid;
                     if (channels !== "") {
                         url += "&channel=" + channels;
                     }

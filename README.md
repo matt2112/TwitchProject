@@ -1,4 +1,4 @@
-# TwitchProject
+# Twitch Interface
 TwitchTV app developed using Angular2 as part of FreeCodeCamp curriculum.
 
 This is the fourth intermediate project in the FreeCodeCamp curriculum. The rules can be viewed here:

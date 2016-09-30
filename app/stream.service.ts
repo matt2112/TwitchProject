@@ -11,17 +11,17 @@ import { FeaturedStream } from './featured-stream';
 @Injectable()
 export class StreamService {
     
-    constructor(private _http: Http) {        
+    constructor(private _http: Http) {
     }
-    
+
+    clientid = "q7wctgvg9bz3kd0srxrecx57i6izxa2";
+
     // Gets streams as featured by Twitch API.
     getFeaturedStreams(limit: string) : Observable<any> {
         
-        var url = "https://api.twitch.tv/kraken/streams/featured";
+        const url = "https://api.twitch.tv/kraken/streams/featured";
         
-        var limit = "?limit=" + limit;
-        
-        return this._http.get(url + limit)
+        return this._http.get(url + "?limit=" + limit + "&client_id=" + this.clientid)
             .map(res => res.json());
 
     }
@@ -29,7 +29,7 @@ export class StreamService {
     // Gets data about a single channel and converts to json format.
     getChannel(channel: string) {
         
-        return this._http.get("https://api.twitch.tv/kraken/channels/" + channel)
+        return this._http.get("https://api.twitch.tv/kraken/channels/" + channel + "?client_id=" + this.clientid)
             .map(res => res.json());
 
     }
@@ -46,7 +46,7 @@ export class StreamService {
     // Gets data about a single stream and converts to json format. Also returns name of channel. 
     getStream(channel: string) {
 
-        return this._http.get("https://api.twitch.tv/kraken/streams/" + channel)
+        return this._http.get("https://api.twitch.tv/kraken/streams/" + channel + "?client_id=" + this.clientid)
             .map(res => {
                 return [res.json(), channel]
             })
@@ -57,8 +57,8 @@ export class StreamService {
     // Gets data of custom streams using optional parameters.
     getCustomStreams(game: string, channels: string, limit: number, stream_type: string, language: string) {
 
-        var url = "https://api.twitch.tv/kraken/streams?game=" + game + "&limit=" + limit
-                                + "&stream_type=" + stream_type + "&language=" + language;
+        let url = "https://api.twitch.tv/kraken/streams?game=" + game + "&limit=" + limit
+                                + "&stream_type=" + stream_type + "&language=" + language + "&client_id=" + this.clientid;
         
         if (channels !== "") {
             url += "&channel=" + channels;
